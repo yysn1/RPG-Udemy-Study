@@ -45,7 +45,7 @@ public class PlayerWallJumpState : PlayerState
             }
             else
             {
-                player.SetVelocity(wallJumpDirection * 10f, rb.velocity.y);
+                player.SetVelocity(rb.velocity.x, rb.velocity.y);
             }
         }
 

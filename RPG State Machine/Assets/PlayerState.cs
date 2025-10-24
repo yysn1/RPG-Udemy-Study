@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState 
+public class PlayerState
 {
     protected PlayerStateMachine stateMachine;
     protected Player player;
@@ -17,6 +17,8 @@ public class PlayerState
 
     protected float stateTimer;
 
+    protected bool triggerCalled;
+
     public PlayerState(Player _Player, PlayerStateMachine _stateMachine, string _animBoolName)
     {
         this.player = _Player;
@@ -28,6 +30,7 @@ public class PlayerState
     {
         player.anim.SetBool(animBoolName, true);
         rb = player.rb;
+        triggerCalled = false;
     }
 
     public virtual void Update()
@@ -45,4 +48,8 @@ public class PlayerState
         player.anim.SetBool(animBoolName, false);
     }
 
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
+    }
 }
