@@ -22,7 +22,23 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
 
-        if (player.IsgroundDetected())
+        if (player.IsWallDetected() && xInput == player.facingDir)
+        {
+            stateMachine.ChangeState(player.wallSlideState);
+        }
+
+        if (xInput != 0)
+        {
+            player.SetVelocity(xInput * player.moveSpeed * .8f, player.rb.velocity.y);
+        }
+        else
+        {
+            // 如果没有水平输入，逐渐减速
+            player.SetVelocity(Mathf.Lerp(rb.velocity.x, 0, 0.2f), rb.velocity.y);
+        }
+
+
+        if (player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.idleState);
         }
